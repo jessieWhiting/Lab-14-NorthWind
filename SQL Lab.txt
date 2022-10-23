@@ -1,0 +1,162 @@
+1.) Select all the rows from the "Customers" table. 
+select * from Customers
+
+2.)Get distinct countries from the Customers table.
+select Country from Customers;
+
+3.)Get all the rows from the table Customers where the Customer’s ID starts with “BL”.
+select * 
+from Customers
+where charindex('BL', CustomerID) > 0;
+
+
+4.)Get the first 100 records of the orders table. DISCUSS: Why would you do this? What else would you likely need to include in this query?
+select top 100 * from Orders
+Useful for chunking and viewing specific blocks of info. 
+
+5.)Get all customers that live in the postal codes 1010, 3012, 12209, and 05023.
+select * from Customers where PostalCode in ('3021', '1010','12209','05023')
+
+6.)Get all orders where the ShipRegion is not equal to NULL.
+select * from orders where ShipRegion is not null;
+
+7.)Get all customers ordered by the country, then by the city.
+select * from Customers 
+order by Country;
+select * from Customers 
+order by City;
+
+8.)Add a new customer to the customers table. You can use whatever values.
+insert into Customers
+Values('JNWWWW','Jiggle Joint','Jessie Whiting','Owner','666Jello Street','Madrid','BC',48197,'Canada',000-867-5309,000-903-5768)
+
+9.)Update all ShipRegion to the value ‘EuroZone’ in the Orders table, where the ShipCountry is equal to France.  
+update Orders
+set ShipRegion = 'EuroZone'
+where ShipCountry = 'France';
+
+10.)Delete all orders from OrderDetails that have quantity of 1. 
+delete from [Order Details] where Quantity = 1;
+
+11.) Find the CustomerID that placed order 10290 (orders table).
+select CustomerID 
+from Orders
+where OrderID = '10290'
+
+12.) Join the orders table to the customers table.
+select Customers.CustomerID, Orders.OrderID
+from Customers
+full outer join Orders on Customers.CustomerID = Orders.CustomerID
+order by Customers.CustomerID;
+
+
+13.) Get employees’ firstname for all employees who report to no one.
+select FirstName
+from Employees
+group by FirstName
+having count(ReportsTo) < 1;
+
+14.)Get employees’ firstname for all employees who report to Andrew.
+select FirstName
+from Employees
+group by FirstName
+having count(ReportsTo) >= 1;
+
+
+EXTRA CHALLENGES:
+1.)Calculate the average, max, and min of the quantity at the orderdetails table, grouped by the orderid. 
+//////////////////
+
+2.)Calculate the average, max, and min of the quantity at the orderdetails table.
+select avg(Quantity) as AvgQuantity
+from OrderDetails
+
+select max(Quantity) as MaxQuantity
+from OrderDetails
+
+select min(Quantity) as MinQuantity
+from OrderDetails
+
+3.)Find all customers living in London or Paris
+select * from Customers
+where City = 'London' or City = 'Paris';
+
+4.)Do an inner join, left join, right join on orders and customers tables. 
+Inner Join:
+select Customers.CustomerID, Orders.OrderID
+from Customers
+inner join Orders on Customers.CustomerID = Orders.CustomerID
+order by Customers.CustomerID;
+
+
+Left Join:
+select Customers.CustomerID, Orders.OrderID
+from Customers
+left join Orders on Customers.CustomerID = Orders.CustomerID
+order by Customers.CustomerID;
+
+Right Join:
+select Customers.CustomerID, Orders.OrderID
+from Customers
+right join Orders on Customers.CustomerID = Orders.CustomerID
+order by Customers.CustomerID;
+
+
+5.)Make a list of cities where customers are coming from. The list should not have any duplicates or nulls.
+///////////////////
+
+6.)Show a sorted list of employees’ first names. 
+Show a sorted list of employees’ first names. 
+select FirstName 
+from Employees
+order by FirstName desc;
+
+7.)Find total for each order
+//////////////////
+
+8.)Get a list of all employees who got hired between 1/1/1994 and today
+select *
+from Employees
+where HireDate Between'1994-01-01' and '2022-10-22';
+
+9.) Find how long employees have been working for Northwind (in years!)
+///////////////////
+
+10.)Get a list of all products sorted by quantity (ascending and descending order)
+select ProductName, QuantityPerUnit
+from Products
+order by ProductName asc, QuantityPerUnit asc;
+
+11.)Find all products that are low on stock (quantity less than 6)
+select ProductName, UnitsInStock
+from Products
+where UnitsInStock > 6;
+
+12.)Find a list of all discontinued products. 
+select ProductName, Discontinued
+from Products
+where Discontinued >= 1;
+
+13.)Find a list of all products that have Tofu in them.
+select *
+from Products
+where charindex('Tofu', ProductName) > 0;
+
+14.)Find the product that has the highest unit price. 
+select max(UnitPrice) as MaxUnitPrice
+from Products;
+
+15.)Get a list of all employees who got hired after 1/1/1993
+select *
+from Employees
+where HireDate Between'1993-01-01' and '2022-10-22';
+
+16.)Get all employees who have title : “Ms.” And “Mrs.”
+select *
+from Employees
+where charindex('Ms.', TitleOfCourtesy) > 0 or charindex('Mrs.',TitleOfCourtesy) > 0;
+
+17.)Get all employees who have a Home phone number that has area code 206
+select *
+from Employees
+where charindex('206', HomePhone)> 0;
