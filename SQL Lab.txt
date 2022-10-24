@@ -23,6 +23,7 @@ select * from orders where ShipRegion is not null;
 7.)Get all customers ordered by the country, then by the city.
 select * from Customers 
 order by Country;
+
 select * from Customers 
 order by City;
 
@@ -36,7 +37,9 @@ set ShipRegion = 'EuroZone'
 where ShipCountry = 'France';
 
 10.)Delete all orders from OrderDetails that have quantity of 1. 
-delete from [Order Details] where Quantity = 1;
+delete from OrderDetails where Quantity = 1;
+
+-- I canged Order Details to OrderDetails.. I know it would be [Order Details]..just easier
 
 11.) Find the CustomerID that placed order 10290 (orders table).
 select CustomerID 
@@ -103,7 +106,8 @@ order by Customers.CustomerID;
 
 
 5.)Make a list of cities where customers are coming from. The list should not have any duplicates or nulls.
-///////////////////
+select distinct City from Customers 
+where City is not null;
 
 6.)Show a sorted list of employees’ first names. 
 Show a sorted list of employees’ first names. 
